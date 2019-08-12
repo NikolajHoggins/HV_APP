@@ -63,6 +63,7 @@
 				margin-bottom: 30px;
 			}
 		</style>
+		<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-mtS696VnV9qeIoC8w/PrPoRzJ5gwydRVn0oQ9b+RJOPxE1Z1jXuuJcyeNxvNZhdx" crossorigin="anonymous">
 	</head>
 	<body>
 		<div class="flex-center position-ref full-height">
@@ -86,20 +87,30 @@
 				</div>
 
 				<div class="links">
-					<a href="https://laravel.com/docs">Magnus</a>
-					<a href="https://laracasts.com">Laracasts</a>
-					<a href="https://laravel-news.com">News</a>
-					<a href="https://blog.laravel.com">Blog</a>
-					<a href="https://nova.laravel.com">Nova</a>
-					<a href="https://forge.laravel.com">Forge</a>
-					<a href="https://github.com/laravel/laravel">GitHub</a>
+					@if (Route::has('login'))
+					@auth
+						<a href="{{ url('/home') }}">Home</a>
+						<a href="{{ route('logout') }}" onclick="event.preventDefault();
+						document.getElementById('logout-form').submit();">Logout</a>
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+					@else
+						<a href="{{ route('login') }}">Login</a>
+
+						@if (Route::has('register'))
+							<a href="{{ route('register') }}">Register</a>
+						@endif
+					@endauth
+				@endif
+				@if (Session::has('msg'))
+					<p>{!! Session::get('msg') !!}</p>
+				@endif
 				</div>
 			</div>
 
-			
+
 		</div>
 		<div class="container">
-				
+
 		</div>
 	</body>
 </html>

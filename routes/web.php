@@ -12,10 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('posts');
 });
 
 Auth::routes();
+
+//CVR Auth
+
+Route::post('/cvrlogin', 'CvrAuthController@loginCVR');
+
+Route::post('/updateProfile', 'CvrAuthController@updateProfile');
+
+Route::get('/profile', 'HomeController@profile')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -23,3 +31,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Test routes
 
 Route::get('/cardsetup', 'testingController@cardsetup');
+
+Route::get('/test/{number}', 'testingController@meme');
+
+
