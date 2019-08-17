@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    Magnus was here.
+                    Magnus WAS here, now he is GONE.
                     You are logged in!
                 </div>
             </div>

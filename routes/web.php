@@ -17,7 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//CVR Auth
+
+// CVR Auth //
 
 Route::post('/cvrlogin', 'CvrAuthController@loginCVR');
 
@@ -26,6 +27,11 @@ Route::post('/updateProfile', 'CvrAuthController@updateProfile');
 Route::get('/profile', 'HomeController@profile')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Post Routes //
+
+Route::post('/posttype', 'PostController@posttype');
+
 
 
 //Test routes
