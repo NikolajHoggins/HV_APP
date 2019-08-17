@@ -17,7 +17,14 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('posttype'); //Er det et salgs -eller søgningsopslag?
             $table->string('title', 20);
-            $table->text('description');
+
+            //Valgfrit
+            $table->text('description')->nullable();
+            $table->string('picture')->nullable();
+
+            //Bliver brugt til at hente data fra andre tables, som bliver vist i post.
+            $table->integer('employee')->refrences('id')->on('employees');
+            $table->integer('company')->references('id')->on('users');
             $table->timestamps();
         });
     }
