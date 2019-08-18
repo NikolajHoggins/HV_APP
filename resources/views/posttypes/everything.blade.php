@@ -1,8 +1,6 @@
-@php
-$title = $postdata->title;
-echo '<div class="card mb-4 shadow-sm">
+<div class="card mb-4 shadow-sm">
     <div class="card-header">
-      <h4 class="my-0 font-weight-bold text-left">'$title'</h4>
+      <h4 class="my-0 font-weight-bold text-left">{{$postdata->title}} {{$postdata->id}} </h4>
     </div>
     <div class="card-body">
         <div class="container">
@@ -28,7 +26,7 @@ echo '<div class="card mb-4 shadow-sm">
                         <h1 class="card-title pricing-card-title">Yderligere information</h1>
                     </div>
                     <div class="row">
-                        <p class="text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p class="text-left">{{$postdata->description}}</p>
                     </div>
                 </div>
             </div>
@@ -41,5 +39,4 @@ echo '<div class="card mb-4 shadow-sm">
           <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-4">Læs mere</button>
     </div>
 </div>
-'
-@endphp
+

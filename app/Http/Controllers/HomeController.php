@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -29,5 +29,22 @@ class HomeController extends Controller
     {
         return view('profile');
     }
+    public function home(){
+        $postdata = \App\Post::all();
+        return view('posts')->with('posts', $postdata);
+    }
+    public function posts($pagetype, $pagenr){
+        $postcount = \App\Post::all()->count();
+        $postmax = 2;
+        $pagecount = ceil($postcount / $postmax);
+        $skipcount = $pagenr-1;
+        $skipcount = $postmax*$skipcount;
+        $postdata = \DB::table('posts')->latest()->where('posttype', $pagetype)->skip($skipcount)->take($postmax)->get();
+
+        return view('posts')->with('posts', $postdata)->with('pagecount', $pagecount)->with('pagenr', $pagenr);
+
+
+    }
+
 
 }

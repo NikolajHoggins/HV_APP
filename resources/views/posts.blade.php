@@ -2,53 +2,46 @@
 
 @section('content')
 @php
-$array = ['meme', 'din mor'];
-@endphp
-@php
 
-function getcard($id, $posttype){
-
-    $data = array(
-        'id' => $id,
-        'posttype' => $posttype,
-    );
-
-    $payload = json_encode($data);
-
-    // Prepare new cURL resource
-    $ch = curl_init("/posttype");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-
-    // Set HTTP Header for POST request
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/json',
-        'Content-Length: ' . strlen($payload))
-    );
-
-    // Submit the POST request
-    $result = curl_exec($ch);
-
-    // Close cURL session handle
-    curl_close($ch);
-    return $result;
+function getcard($post, $posttype){
+    if($posttype == 'everything'){
+        return view('posttypes.everything')->with('postdata', $post);
+    }else{
+        return 'meme';
+    }
 
 }
 @endphp
-
-@foreach($array as $title)
-
 <body>
+@foreach($posts as $post)
 	<div class="container text-center">
 		<div class="card-deck mb-3 text-center mt-3" style="width: 88%; margin: 0 6%">
             @php
-            echo getcard(1, 'everything');
+            echo getcard($post, 'everything');
             @endphp
 		</div>
-	</div>
-</body>
+    </div>
 @endforeach
+</body>
+
+{{-- PAGE NAVIGATION FIXES MED JQUERY (HVIS DEN SER ET "-" HIDER VI BARE FELTET LUL)--}}
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        @if($pagenr>2 && $pagenr<$pagecount-2)
+        <li class="page-item"><a class="page-link" href="/posts/1/{{$pagenr-1}}">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="/posts/1/{{$pagenr-2}}">{{$pagenr-2}}</a></li>
+        <li class="page-item"><a class="page-link" href="/posts/1/{{$pagenr-1}}">{{$pagenr-1}}</a></li>
+        <li class="page-item active"><a class="page-link" href="">{{$pagenr}}</a></li> {{-- DEN SIDE VI ER PÅ--}}
+        <li class="page-item"><a class="page-link" href="/posts/1/{{$pagenr+1}}">{{$pagenr+1}}</a></li>
+        <li class="page-item"><a class="page-link" href="/posts/1/{{$pagenr+2}}">{{$pagenr+2}}</a></li>
+        <li class="page-item"><a class="page-link" href="/posts/1/{{$pagenr+1}}">Next</a></li>
+        @endif
+    </ul>
+</nav>
+
+
+
+
+
 @endsection
 

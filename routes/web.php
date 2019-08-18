@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('posts');
-});
+Route::get('/', 'HomeController@home');
+Route::get('/posts/{pagetype}/{pagenr}', 'HomeController@posts');
 
 Auth::routes();
 
@@ -30,7 +29,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Post Routes //
 
-Route::post('/posttype', 'PostController@posttype');
+Route::get('/createpost/{title}', 'PostController@createpost');
+Route::get('/getposts/{amount}/{skip}', 'PostController@getposts');
 
 
 
