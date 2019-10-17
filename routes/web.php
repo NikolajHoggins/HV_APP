@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'HomeController@home');
+Route::get('/', function(){
+    return redirect('/posts/1/1');
+});
 Route::get('/posts/{pagetype}/{pagenr}', 'HomeController@posts');
 
 Auth::routes();
